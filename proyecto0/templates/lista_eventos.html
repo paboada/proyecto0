@@ -1,0 +1,51 @@
+{% extends 'base_layout.html' %}
+<!--<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <title>Lista de Eventos</title>
+  </head>
+  <body>-->
+  {% block content%}
+    <h1>Lista de Eventos</h1>
+    <div>
+      <p>Bienvenido! Estimado Usuario : {{ user }} </p>
+      <p>Esta es la lista de eventos de su agenda</p>
+    </div>
+    <div>
+       <table class="table table-hover table-sm">
+        <thead class="thead-inverse">
+        <tr>
+          <!--<th>Id</th>-->
+          <th>Nombre Evento</th>
+          <th>Fecha Inicio</th>
+          <th>Borrar Evento</th>
+          <th>Editar Evento</th>
+        </tr>
+      </thead>
+       <tbody>
+          {% for evento in eventos%}
+            <tr>
+              <!--<td>{{ evento.id }}</td>-->
+                <td><a href="{% url 'agenda_eventos:detalle_evento' id_evento=evento.id %}">{{ evento.nombre_evento }}</a></td>
+              <td>{{ evento.fecha_inicio }}</td>
+              <td><a href="{% url 'agenda_eventos:borrar' id_evento=evento.id %}">Borrar</a></td>
+              <td><a href="{% url 'agenda_eventos:editar' id_evento=evento.id %}">Editar</a></td>
+          {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div class = "opciones">
+      <form class ='formularios' method='get' action="{% url 'agenda_eventos:crear_eventos' %}">
+        {% csrf_token %}
+          <input class="btn btn-primary my-2" type='submit' value='Crear Evento'/>
+      </form>
+      <form method='get' action="{% url 'agenda_eventos:logout' %}">
+        {% csrf_token %}
+        <input class="btn btn-primary my-2" type='submit' value='Logout'/>
+      </form>
+    </div>
+{% endblock%}
+<!--  </body>
+</html>-->

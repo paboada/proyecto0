@@ -1,0 +1,36 @@
+{% extends 'base_layout.html' %}
+{% block content%}
+    <h1>Detalle del Evento</h1>
+    <div>
+       <table class="table table-hover table-sm">
+        <tr>
+          <!--<th>Id</th>-->
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Nombre Evento</th>
+          <th>Categoria</th>
+          <th>Modalidad</th>
+          <th>Lugar</th>
+          <th>Direccion</th>
+        </tr>
+          {% for evento in evento%}
+            <tr>
+              <!--<td>{{ evento.id }}</td>-->
+              <td>{{ evento.fecha_inicio }}</td>
+              <td>{{ evento.fecha_fin }}</td>
+              <td>{{ evento.nombre_evento }}</td>
+              <td>{{ evento.categoria }}</td>
+              <td>{{ evento.modalidad }}</td>
+              <td>{{ evento.lugar }}</td>
+              <td>{{ evento.direccion }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    </div>
+    <div>
+      <form class ='formularios' method='post' action="{% url 'agenda_eventos:lista_eventos' %}">
+        {% csrf_token %}
+        <p><input class="btn btn-primary my-2" type='submit' value='Volver a lista'/></p>
+      </form>
+    </div>
+{% endblock%}
